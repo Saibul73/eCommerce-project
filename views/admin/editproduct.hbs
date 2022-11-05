@@ -1,0 +1,65 @@
+
+<div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Edit Products</h6>
+                            <form action="/admin/edit-product/{{productData._id}}" method="post" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label >Product Name</label>
+                                    <input type="text" name="name" class="form-control" value="{{productData.name}}">
+                                
+                                </div>
+
+                                <div class="mb-3">
+                                    <label >Brand Name</label>
+                                    <input type="text" name="brandName" class="form-control " value="{{productData.brandName}}">
+                                
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="" class="form-label">Product Category</label>
+                                    {{!-- <input type="text" name="category" class="form-control"> --}}
+                                    <select name="category" class="form-select form-select mb-3" aria-label=".form-select-sm example" id="" value="{{productData.category}}">
+                                        {{#each categoryData}}
+                                        <option value="{{this._id}}">{{this.category}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="" >Product Description</label>
+                                    <input type="text" name="description" class="form-control" value="{{productData.description}}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="" >Product Qauntity</label>
+                                    <input type="text" name="stock" class="form-control" value="{{productData.stock}}">
+                                </div>
+
+                                 <div class="mb-3">
+                                    <label for="" >Product Amount</label>
+                                    <input type="text" name="price" class="form-control" value="{{productData.price}}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="" >Discount</label>
+                                    <input type="text" name="discount" class="form-control" value="{{productData.discount}}">
+                                </div>
+
+                                 <div class="mb-3">
+                                    <label for="" >Product Image</label>
+                                    <img src="/product_uploads/{{productData.imagepath.[0]}}" alt="" style="width: 100px;height:100px" id="imgView">
+                                    <input type="file" name="photos" class="form-control" id="formFileMultiple" onchange="viewImage(event)" multiple>
+                                </div>
+                                {{!-- <div><a href='/admin/products' type="submit" class="btn btn-primary ">Confirm</a></div> --}}
+                                <button  type="submit" class="btn btn-primary">Confirm</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <script>
+    function viewImage(event){
+        document.getElementById('imgView').src=URL.createObjectURL(event.target.files[0])
+    }
+</script>

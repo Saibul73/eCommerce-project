@@ -1,0 +1,144 @@
+
+        <!-- Sale & Revenue Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                {{!-- <div class="col-sm-6 col-xl-3">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-line fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Today Sale</p>
+                            <h6 class="mb-0">$1234</h6>
+                        </div>
+                    </div>
+                </div> --}}
+                {{!-- <div class="col-sm-6 col-xl-3">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Total Sale</p>
+                            <h6 class="mb-0">$1234</h6>
+                        </div>
+                    </div>
+                </div> --}}
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-3">
+                        <i class="fa fa-chart-area fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            {{!-- <p class="">Sales Report</p> --}}
+                            {{!-- <h6 class="mb-0">$1234</h6> --}}
+                            <a href="/admin/salesReport" class="btn btn-primary m-2 mt-3 mb-3">Sales Report</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                    <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                        <i class="fa fa-chart-pie fa-3x text-primary"></i>
+                        <div class="ms-3">
+                            <p class="mb-2">Total Revenue</p>
+                            <h6 class="mb-0">₹{{TotalRevenue}}</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sale & Revenue End -->
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <!-- Sales Chart Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-secondary text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">Daily Sales</h6>
+                            <a href="/admin/orders">Past Week</a>
+                        </div>
+                        <canvas id="myChart" width="50" height="35"></canvas>
+
+
+                        <script>
+                            const ctx = document.getElementById('myChart').getContext('2d');
+                            const myChart = new Chart(ctx, {
+                                type: 'line',
+
+                                data: {
+                                    labels: [
+                                        '{{eachDaySale.[0]._id.day}}/{{eachDaySale.[0]._id.month}}/{{eachDaySale.[0]._id.year}}',
+                                        '{{eachDaySale.[1]._id.day}}/{{eachDaySale.[1]._id.month}}/{{eachDaySale.[1]._id.year}}',
+                                        '{{eachDaySale.[2]._id.day}}/{{eachDaySale.[2]._id.month}}/{{eachDaySale.[2]._id.year}}',
+                                        '{{eachDaySale.[3]._id.day}}/{{eachDaySale.[3]._id.month}}/{{eachDaySale.[3]._id.year}}',
+                                        '{{eachDaySale.[4]._id.day}}/{{eachDaySale.[4]._id.month}}/{{eachDaySale.[4]._id.year}}',
+                                        '{{eachDaySale.[5]._id.day}}/{{eachDaySale.[5]._id.month}}/{{eachDaySale.[5]._id.year}}',
+                                        '{{eachDaySale.[6]._id.day}}/{{eachDaySale.[6]._id.month}}/{{eachDaySale.[6]._id.year}}'
+                                    ],
+                                    datasets: [{
+                                        label: 'Delivered',
+                                        data: [
+                                            '{{eachDaySale.[0].total}}',
+                                            '{{eachDaySale.[1].total}}',
+                                            '{{eachDaySale.[2].total}}',
+                                            '{{eachDaySale.[3].total}}',
+                                            '{{eachDaySale.[4].total}}',
+                                            '{{eachDaySale.[5].total}}',
+                                            '{{eachDaySale.[6].total}}',
+                                        ],
+                                        fill: false,
+                                        borderColor: 'rgb(75, 80, 192)',
+                                        tension: 0.1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-secondary text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <h6 class="mb-0">Order Summary</h6>
+                            <a href="/admin/orders">Total Orders</a>
+                        </div>
+
+                        <div id="piechart_3d" style="width: 500px; height: 357px;"></div>
+
+                    </div>
+
+                    <!-- Sales Chart End -->
+                    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                    <script type="text/javascript">
+                        google.charts.load("current", { packages: ["corechart"] });
+                        google.charts.setOnLoadCallback(drawChart);
+                        function drawChart() {
+                            var data = google.visualization.arrayToDataTable([
+                                ['Task', 'Hours per Day'],
+                                ['Delivered', {{ deliveredCount }}],
+                        ['Placed', {{ placedCount }}],
+                            ['Shipped', {{ shippedCount }}],
+                            ['Cancelled', {{ cancelledCount }}],
+        
+        ]);
+
+                        var options = {
+
+                            is3D: true,
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                        chart.draw(data, options);
+      }
+                    </script>
+
+                </div>
+            </div>
+        </div>
+
+
+
+       
+       

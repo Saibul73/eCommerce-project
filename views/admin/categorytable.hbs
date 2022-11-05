@@ -1,0 +1,46 @@
+
+
+<div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+<div class="col-12">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Responsive Table</h6>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Category</th>
+                                        
+                                            <th scope="col">Edit-Category</th>
+                                            <th scope="col">Delete-Category</th>
+                                            {{!-- <th scope="col">Block/Unblock User</th>
+                                            <th scope="col">Status</th> --}}
+                                        </tr>
+                                    </thead> 
+
+                                    <tbody>
+                                     {{#each categorydata}}
+                                        <tr>
+                                            <th scope="row">{{inc @index}}</th>
+                                            <td>{{this.category}}</td>
+                                           
+                                            <td><a href="/admin/editcategory/{{this._id}}"><i class="bi bi-pencil-square"></i></a></td>
+                                            <td><a href="/admin/delete-category/{{this._id}}" onclick="return confirm ('Are you sure to delete {{this.Name}} ?')"><i class="bi bi-trash"></i></a></td>
+                                            {{!-- <td><a href="/admin/edit/{{this._id}}"><i class="bi bi-pencil-square"></i></a></td>
+                                            {{#if this.block}}
+                                          
+                                            <td><button class="btn btn-primary">blocked</button></td>
+                                            {{else}}
+                                              <td><button class="btn btn-success">active</button></td>
+                                            {{/if}} --}}
+                                        </tr>
+                                   {{/each}}
+                                 </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Table End -->

@@ -1,0 +1,76 @@
+
+
+<!-- Blank Start -->
+            {{#if placed}}
+            
+             <div class="col-sm-12 col-xl-6 m-5">
+                
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Edit Status</h6>
+                            <form action="/admin/editStatusButton/{{orderData._id}}" method="post">
+                            <select class="form-select mb-3" name="status" aria-label="Default select example">
+                                
+                                <option value="cancelled">cancelled</option>
+                                <option value="shipped">Shipped</option>
+                                <option value="delivered">Delivered</option>
+                            </select>
+                          <button type="submit" class="btn btn-danger m-2">Submit</button>
+                           </form>
+                        </div>
+                        
+            
+             </div>
+             
+             {{/if}}
+             {{#if shipped}}
+             <div class="col-sm-12 col-xl-6 m-5">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Edit Status</h6>
+                            <form action="/admin/editStatusButton/{{orderData._id}}" method="post">
+                            <select class="form-select mb-3" name="status" aria-label="Default select example">
+                                
+                                 <option value="cancelled">cancelled</option>
+                                {{!-- <option value="2">Shipped</option> --}}
+                                <option value="delivered">Delivered</option>
+                            </select>
+                          <button type="submit" class="btn btn-danger m-2">Submit</button>
+
+                          </form>
+                        </div>
+             </div>
+             {{/if}}
+             {{#if delivered}}
+             <div class="col-sm-12 col-xl-6 m-5">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Edit Status</h6>
+                            
+                            {{!-- <select class="form-select mb-3" aria-label="Default select example">
+                                
+                                <option value="1">Placed</option>
+                                <option value="2">Shipped</option>
+                                <option value="3">Delivered</option>
+                            </select> --}}
+                          <h6 class="mb-4">Already delivered</h6>
+                          <a href="/admin/orders"><button type="submit" class="btn btn-danger m-2">Go Back</button></a>
+                          
+                        </div>
+             </div>
+             {{/if}}
+             {{#if cancelled}}
+             <div class="col-sm-12 col-xl-6 m-5">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Edit Status</h6>
+                            
+                            {{!-- <select class="form-select mb-3" aria-label="Default select example">
+                                
+                                <option value="1">Placed</option>
+                                <option value="2">Shipped</option>
+                                <option value="3">Delivered</option>
+                            </select> --}}
+                          <h6 class="mb-4">Already Cancelled</h6>
+                          <a href="/admin/orders"><button type="submit" class="btn btn-danger m-2">Go Back</button></a>
+                          
+                        </div>
+             </div>
+             {{/if}}
+            <!-- Blank End -->

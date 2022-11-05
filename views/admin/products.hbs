@@ -1,0 +1,51 @@
+
+<div class="col-12">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">Products</h6>
+                            <div><a href='/admin/add-product' class="btn btn-success ">Add Product</a></div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">sl.no</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Brand Name</th>
+                                            <th scope="col">Product Category</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Qauntity</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Discount</th>
+                                            <th scope="col">Product Image</th>
+                                            <th scope="col">Edit</th>
+                                            <th scope="col">Delete</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                    {{#each productData}}
+                    <tr>
+                        <td>{{inc @index}}</td>
+                        <td>{{this.name}}</td>
+                        <td>{{this.brandName}}</td>
+                        <td>{{this.category.category}}</td>
+                        <td>{{this.description}}</td>
+                        <td>{{this.stock}}</td>
+                        <td>{{this.price}}</td>
+                        <td>{{this.discount}}</td>
+                        
+                         <td><img src="/product_uploads/{{this.imagepath.[0]}}" style="width: 60px; height: 60px; " alt=""></td>
+                        <td>
+                            <a href="/admin/edit-product/{{this._id}}" class="btn btn-primary">Edit</a>
+                            </td>
+                        <td>
+                            <a href="/admin/delete-product/{{this._id}}" class="btn btn-danger"
+                                onclick="return confirm ('Are you sure to delete {{this.name}} ?')">Delete</a>
+                            </td>
+                    </tr>
+                    {{/each}}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>

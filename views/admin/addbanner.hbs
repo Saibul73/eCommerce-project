@@ -1,0 +1,44 @@
+<!-- Form Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+                <div class="col-sm-12 col-xl-6">
+                    <div class="bg-secondary rounded h-100 p-4">
+                        <h6 class="mb-4">Add New Banner</h6>
+                        <form method="post" action="/admin/addBanner" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label class="form-label">Heading</label>
+                                <input type="text" class="form-control" name="heading" />
+
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Sub-Heading</label>
+                                <input type="text" class="form-control" id="exampleInputPassword1" name="subHeading" />
+                            </div>
+
+
+
+                            <div class="mb-3" style="padding: top 5px; ;">
+                                <label for="formFileMultiple" class="form-label">Choose Product Images</label>
+                                <input name="image" class="form-control bg-dark" type="file" id="formFileMultiple"
+                                    multiple>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Product Name</label>
+                                <select name="product" class="form-select form-select mb-3"
+                                    aria-label=".form-select-sm example">
+                                    {{#each productData}}
+                                    <option value="{{this._id}}">{{this.name}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Add Banner</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Form End -->

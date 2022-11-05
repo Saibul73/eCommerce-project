@@ -1,0 +1,65 @@
+<form class="bg0 p-t-75 p-b-85">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+					<div class="m-l-25 m-r--38 m-lr-0-xl">
+						<div class="wrap-table-shopping-cart">
+							<table class="table-shopping-cart">
+								<tr class="table_head">
+									<th class="column-1">Product</th>
+									<th class="column-2"></th>
+									<th class="column-3">Price</th>
+									<th class="column-4"></th>
+									<th class="column-5"></th>
+								</tr>
+
+								{{#each wishlistData.products}}
+
+								<tr class="table_row">
+									<td class="column-1">
+										<div class="how-itemcart1">
+											<img src="/product_uploads/{{this.productId.imagepath.[0]}}" alt="IMG">
+										</div>
+									</td>
+									<td class="column-2"><a href="/product_detail/{{this.productId._id}}" class="stext-104 cl8 hov-cl1 trans-04 js-name-b2 p-b-6">{{this.productId.name}}</a></td>
+									<td class="column-3">{{this.productId.price}}</td>
+									<td ><button class="btn btn-light ml-3 btn-outline-danger" onclick="removeItem('{{../wishlistData._id}}','{{this.productId._id}}')" type="submit">Remove</button> 
+									</td>
+									<td><button onclick="addtocart('{{this.productId._id}}')" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+										Add to cart
+									</button></td>
+									
+								</tr>
+
+								{{/each}}
+							</table>
+						</div>
+
+						
+					</div>
+				</div>
+
+				
+			</div>
+		</div>
+	</form>
+
+	<script>
+		function removeItem(wishlistId,proId){
+			console.log(wishlistId,proId,"TESTTTTT")
+			$.ajax({
+				url:'/remove-wishlist',
+				data:{
+					wishlist:wishlistId,
+					product:proId
+				},
+				method:'post',
+				success:(response)=>{
+					if(response.removeproduct){
+						alert('Removed from wishlist')
+						location.reload();
+					}
+				}
+			})
+		}
+	</script>

@@ -1,0 +1,103 @@
+<!-- Sign Up Start -->
+        <div class="container-fluid">
+            
+            <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+                <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                    <div class="bg-light rounded p-4 p-sm-5 my-4 mx-3">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <a href="#" class="">
+                                <h3 class="text-dark"><i class="fa fa-user-edit me-2"></i>Urban Bull</h3>
+                            </a>
+                            <h3>Sign Up</h3>
+                        </div>
+                        <form action="/user-signup" method="post" >
+                            <div class="form-floating mb-3">
+                            <input type="text" name="first_name" class="form-control" id="first_name" >
+                            <label for="floatingText">First Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" name="last_name" class="form-control" id="last_name" >
+                            <label for="floatingText">Last Name</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input  type="tel" name="phone_number" class="form-control" id="Phone_number" >
+                            <label for="phone">Phone Number</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input required type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">Email address</label>
+                        </div>
+                        
+                        <div class="form-floating mb-4">
+                            <input type="password" name="password"class="form-control" id="floatingPassword" placeholder="Password">
+                            <label for="floatingPassword">Password</label>
+                        </div>
+                        
+                        {{#if msg}}
+                        <p class="text-danger">{{msg}}</p>
+                        {{/if}}
+                        <button type="submit" class="btn btn-success py-3 w-100 mb-4">Sign Up</button>
+                        </form>
+                        
+                        <p class="text-center mb-0">Already have an Account? <a href="/user-login">Sign In</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sign Up End -->
+
+        <!-- jquery validation section -->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+
+<style>
+    .error {
+        color: rgb(253, 5, 5);
+    }
+</style>
+
+        <script>
+            $("#myform").validate({
+        rules: {
+            first_name: {
+                required: true,
+                minlength: 2,
+                //lettersonly: true
+            },
+            last_name: {
+                required: true,
+                minlength: 2,
+                //lettersonly: true
+            },
+
+            email: {
+                required: true
+                , email: true,
+                minlength: 4
+            },
+            phone_number: {
+                required: true,
+                minlength: 10,
+                maxlength: 10,
+                digits: true
+            },
+            password: {
+                required: true,
+                minlength: 3
+            },
+            passwordRepeat: {
+                required: true,
+                equalTo: "#password"
+            },
+        },
+        messages: {
+            password: {
+                required: "Password is required", minlength: "Password should ontain atleast 3 characters"
+            },
+            passwordRepeat: { equalTo: "Enter the same password " },
+        },
+
+    })
+        </script>
