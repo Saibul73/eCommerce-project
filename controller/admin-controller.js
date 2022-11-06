@@ -1,18 +1,13 @@
-const express =require('express')
-const mongoose=require('mongoose')
+
 const adminModel=require('../modal/adminschema')
 const productModel=require('../modal/productschema');
 const usersModel =require('../modal/userschema')
 const categoryModel=require('../modal/categoryschema')
 const orderModel=require('../modal/orderSchema')
-const multer=require('multer')
 const fs =require('fs');
 const path =require('path');
-
-var db=require('../configuration/connection')
-
 const bcrypt=require('bcrypt');
-const category = require('../modal/categoryschema');
+
 
 
 module.exports={
@@ -46,7 +41,6 @@ module.exports={
         const { email, password } = req.body;
         console.log(email+password);
         const admin = await adminModel.findOne({ "email": email }).lean();
-        // console.log(admin.password);
         var correct = await bcrypt.compare(password, admin.password)
         if (email == 'admin@gmail.com' && correct) {
             req.session.adminLogin = true;
@@ -54,21 +48,14 @@ module.exports={
             res.redirect('/admin/dash');
         }
     },
-//     async (req,res,next)=>{
-//         const { email,password} =req.body;
-//         console.log(email+password);
-//         const admin = await adminModel.findOne({"email":})
-//     }
+
     getProduct: async (req,res)=>{
         const productData = await productModel.find().populate('category').lean();
-        // const categorydata =await categoryModel.find().lean()
-        console.log(productData);
+        // console.log(productData);
         res.render('admin/products',{layout:'admin-layout',productData})
     },
 
-    // (req,res)=>{
-    //     res.render('admin/products',{layout:'admin-layout'});
-    // },
+ 
     
     renderaddProduct: async (req,res)=>{
         const categorydata =await categoryModel.find().lean()
@@ -92,10 +79,11 @@ module.exports={
 
     },
     deleteProduct: async (req, res, next) => {
-        imagepath = await productModel.findOne({ "_id": req.params.id }, { imagepath: 1, _id: 0 });
+        console.log(req.body,'YEHHH')
+        imagepath = await productModel.findOne({ "_id": req.body.product }, { imagepath: 1, _id: 0 });
         imagepath.imagepath.map((i) => fs.unlinkSync(path.join(__dirname, '..', 'public', 'product_uploads', i)));
-        await productModel.findOneAndDelete({ "_id": req.params.id }, { $set: { "name": req.body.name , "brandName": req.body.brandName,'description':req.body.description,'category':req.body.category,'stock':req.body.stock,'amount':req.body.amount,'discount':req.body.discount,'imagepath':req.body.imagepath} });
-        res.redirect('/admin/products'); 
+        await productModel.findOneAndDelete({ "_id": req.body.product}, { $set: { "name": req.body.name , "brandName": req.body.brandName,'description':req.body.description,'category':req.body.category,'stock':req.body.stock,'amount':req.body.amount,'discount':req.body.discount,'imagepath':req.body.imagepath} });
+        res.json({}); 
     },
     rendereditProduct:async(req,res)=>{
         let productId = req.params.id;

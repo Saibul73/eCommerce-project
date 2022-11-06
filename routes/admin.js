@@ -54,7 +54,7 @@ router.get('/delete-category/:id',session.adminSession,adminController.deleteCat
 router.get('/products',session.adminSession,adminController.getProduct);
 router.get('/add-Product',session.adminSession,adminController.renderaddProduct);
 router.post('/add-Product',session.adminSession,upload.array('photos', 4),adminController.addProduct);
-router.get('/delete-product/:id',session.adminSession,adminController.deleteProduct)
+router.post('/delete-product',session.adminSession,adminController.deleteProduct)
 router.get('/edit-product/:id',session.adminSession,adminController.rendereditProduct)
 router.post('/edit-product/:id',session.adminSession,upload.array('photos', 4),adminController.editproduct)
 
