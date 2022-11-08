@@ -82,12 +82,11 @@ module.exports = {
   adminLogin: async (req, res, next) => {
     try {
       const { email, password } = req.body;
-      console.log(email + password);
+      
       const admin = await adminModel.findOne({ email: email }).lean();
       var correct = await bcrypt.compare(password, admin.password);
       if (email == "admin@gmail.com" && correct) {
         req.session.adminLogin = true;
-        console.log(req.session.adminLogin);
         res.redirect("/admin/dash");
       }
     } catch (error) {
@@ -165,7 +164,7 @@ module.exports = {
         .findOne({ _id: productId })
         .populate("category")
         .lean();
-      console.log(productData, "koooou");
+
       let categoryData = await categoryModel.find().lean();
       res.render("admin/editproduct", {
         layout: "admin-layout",
