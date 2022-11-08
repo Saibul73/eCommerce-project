@@ -1,50 +1,57 @@
- <!-- Table Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                   
-                    <div class="col-12 ">
-                        <div class="bg-secondary rounded h-100 p-4 ">
-                            <h2 class="mb-4 ">Product Table</h2>
-                            <div class="table-responsive  ">
-                                <table class="table table-bordered">
-                                    <div class="">
-                                   <a href="/admin/addBanner">  <button  type="button" class="btn btn-primary m-2 ">Add Banner</button></a>
-                                   </div>
-                                    <thead class="thead-dark bg-dark">
-                                        <tr>
-                                            <th scope="col">No</th>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Heading</th>
-                                              <th scope="col">Subheading</th>
-                                            <th>Product Name</th>
-                                            <th scope="col">Status</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {{#each bannerData}}
-                                        <tr>
-                                            <td>{{ inc @index}}</td>
-                                            
-                                           <td><img src="/bannerImages/{{this.image}}" style="width:65px;height:50px;"></td>
-                                            <td>{{this.heading}}</td>
-                                            <td>{{this.subHeading}}</td>
-                                            <td>{{this.product.name}}</td>
-                                            
-                                           
-                                             <td>
-                                                <a href="/admin/viewEditBanner/{{this._id}}"><i class="bi bi-pencil-square"></i></a>
-                                                <a href="/admin/deleteBanner/{{this._id}}"><i class="bi bi-trash" 
-                                                onclick="return confirm('Are you sure to delete {{this.heading}}?')"></i></a>
-                                             </td>
-                                        </tr>
-                                       {{/each}}
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- Table Start -->
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+
+    <div class="col-12">
+      <div class="bg-secondary rounded h-100 p-4">
+        <h2 class="mb-4">Product Table</h2>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <div class="">
+              <a href="/admin/addBanner">
+                <button type="button" class="btn btn-primary m-2">Add Banner</button></a>
             </div>
-            <!-- Table End -->
+            <thead class="thead-dark bg-dark">
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Image</th>
+                <th scope="col">Heading</th>
+                <th scope="col">Subheading</th>
+                <th>Product Name</th>
+                <th scope="col">Status</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {{#each bannerData}}
+                <tr>
+                  <td>{{inc @index}}</td>
+
+                  <td><img
+                      src="/bannerImages/{{this.image}}"
+                      style="width:65px;height:50px;"
+                    /></td>
+                  <td>{{this.heading}}</td>
+                  <td>{{this.subHeading}}</td>
+                  <td>{{this.product.name}}</td>
+
+                  <td>
+                    <a href="/admin/viewEditBanner/{{this._id}}"><i
+                        class="bi bi-pencil-square"
+                      ></i></a>
+                    <a href="/admin/deleteBanner/{{this._id}}"><i
+                        class="bi bi-trash"
+                        onclick="return confirm('Are you sure to delete {{this.heading}}?')"
+                      ></i></a>
+                  </td>
+                </tr>
+              {{/each}}
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Table End -->

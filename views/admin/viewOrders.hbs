@@ -1,42 +1,44 @@
-
 <!-- Blank Start -->
-        <section class="m-1 p-1">
-          <style>
-            table, th, td { border: 1px solid rgb(139, 130, 137); border-collapse: collapse; color: rgb(241, 240, 240);}
-          </style>
-         
-            <table id="example" class="row-border" style="width:100%">
-              <thead>
-                <tr>
-                  <th>No.</th>
-                  <th>User Email</th>
-                  <th>Phone</th>
-                  <th>Order id</th>
-                  <th>Payment</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                  
-                  <th>Edit</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#each orderData}}
-                <tr>
-                  <td>{{inc @index}}</td>
-                  <td>{{this.userId.email}}</td>
-                  <td>{{this.userId.phone_number}}</td>
-                  <td>{{this._id}}</td>
-                  <td>{{this.paymentMethod}}</td>
-                  <td>{{formatString this.createdAt}}</td>
-                  <td>{{this.status}}</td>
-                  
-                  <td><a href="/admin/editStatus/{{this._id}}"><i class="bi bi-pencil-square"></i></a></td>
+<section class="m-1 p-1">
+  <style>
+    table, th, td { border: 1px solid rgb(139, 130, 137); border-collapse:
+    collapse; color: rgb(241, 240, 240);}
+  </style>
 
-                </tr>
-                {{/each}}
-              </tbody>
-              
-            </table>
-        
-        </section>
-        <!-- Blank End -->
+  <table id="example" class="row-border" style="width:100%">
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>User Email</th>
+        <th>Phone</th>
+        <th>Order id</th>
+        <th>Payment</th>
+        <th>Date</th>
+        <th>Status</th>
+
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each orderData}}
+        <tr>
+          <td>{{inc @index}}</td>
+          <td>{{this.userId.email}}</td>
+          <td>{{this.userId.phone_number}}</td>
+          <td>{{this._id}}</td>
+          <td>{{this.paymentMethod}}</td>
+          <td>{{formatString this.createdAt}}</td>
+          <td>{{this.status}}</td>
+
+          <td><a href="/admin/editStatus/{{this._id}}"><i
+                class="bi bi-pencil-square"
+              ></i></a></td>
+
+        </tr>
+      {{/each}}
+    </tbody>
+
+  </table>
+
+</section>
+<!-- Blank End -->

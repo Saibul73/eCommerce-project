@@ -3,17 +3,15 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const session = require('express-session')
+const session = require("express-session");
 const hbs = require("express-handlebars");
 
-var dotenv = require('dotenv');
-dotenv.config({ path: './config.env' })
+var dotenv = require("dotenv");
+dotenv.config({ path: "./config.env" });
 
 const db = require("./configuration/connection");
 const usersRouter = require("./routes/user");
 const adminRouter = require("./routes/admin");
-
-
 
 const app = express();
 
@@ -29,15 +27,15 @@ app.engine(
         return parseInt(value) + 1;
       },
       formatString(date) {
-        newdate = date.toUTCString()
-        return newdate.slice(0, 16)
+        newdate = date.toUTCString();
+        return newdate.slice(0, 16);
       },
       total: function (amount, discount, quantity) {
         return (amount - discount) * quantity;
       },
       singleTotal: function (amount, discount) {
-        return (amount - discount);
-      }
+        return amount - discount;
+      },
     },
     extname: "hbs",
     defaultLayout: "layout",
@@ -52,17 +50,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(function(req,res,next){
-  res.header('Cache-Control','no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0');
+app.use(function (req, res, next) {
+  res.header(
+    "Cache-Control",
+    "no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0"
+  );
   next();
-})
+});
 
-app.use(session({secret:"key",cookie:{maxAge:100000000*5}}))
-
-// db.connect((err) => {
-//   if (err) console.log("connection Error" + err);
-//   else console.log("Database connected to port 27017");
-// });
+app.use(session({ secret: "key", cookie: { maxAge: 100000000 * 5 } }));
 
 app.use("/", usersRouter);
 app.use("/admin", adminRouter);
@@ -80,7 +76,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("user/error",{layout:false});
+  res.render("user/error", { layout: false });
 });
 
 module.exports = app;

@@ -13,13 +13,20 @@ const bcrypt=require('bcrypt');
 module.exports={
 
     loginPage: async(req,res,next)=>{
-     if(req.session.adminLogin)
+        try {
+           if(req.session.adminLogin)
      return res.redirect('/admin/dash')
-        res.render('admin/login',{layout:false})
+        res.render('admin/login',{layout:false})   
+        } catch (error) {
+            console.log(error);
+            next(error)
+        }
+   
     },
 
     dashboard: async(req,res,next)=>{
-        let delivered = await orderModel.find({ status: 'delivered' }, { status: 1, _id: 0 }).lean()
+        try {
+            let delivered = await orderModel.find({ status: 'delivered' }, { status: 1, _id: 0 }).lean()
     let deliveredCount = delivered.length
     let shipped = await orderModel.find({ status: 'shipped' }, { status: 1, _id: 0 }).lean()
     let shippedCount = shipped.length
@@ -35,24 +42,39 @@ module.exports={
     let today = new Date()
     
         res.render('admin/dashboard',{layout:'admin-layout',deliveredCount,shippedCount,cancelledCount,placedCount,today,TotalRevenue,eachDaySale})
+            
+        } catch (error) {
+            console.log(error)
+            next(error)
+        }
+        
     },
 
     adminLogin: async (req, res, next) => {
-        const { email, password } = req.body;
-        console.log(email+password);
-        const admin = await adminModel.findOne({ "email": email }).lean();
-        var correct = await bcrypt.compare(password, admin.password)
-        if (email == 'admin@gmail.com' && correct) {
-            req.session.adminLogin = true;
-            console.log(req.session.adminLogin);
-            res.redirect('/admin/dash');
+        try {
+            const { email, password } = req.body;
+            console.log(email+password);
+            const admin = await adminModel.findOne({ "email": email }).lean();
+            var correct = await bcrypt.compare(password, admin.password)
+            if (email == 'admin@gmail.com' && correct) {
+                req.session.adminLogin = true;
+                console.log(req.session.adminLogin);
+                res.redirect('/admin/dash');
+            }  
+        } catch (error) {
+            next(error)
         }
+        
     },
 
     getProduct: async (req,res)=>{
-        const productData = await productModel.find().populate('category').lean();
-        // console.log(productData);
-        res.render('admin/products',{layout:'admin-layout',productData})
+        try {
+            const productData = await productModel.find().populate('category').lean();
+            res.render('admin/products',{layout:'admin-layout',productData}) 
+        } catch (error) {
+            next(error)
+        }
+        
     },
 
  
