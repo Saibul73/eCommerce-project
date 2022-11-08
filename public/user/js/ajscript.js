@@ -1,5 +1,4 @@
-// const { response } = require("express");
-// const { get } = require("mongoose");
+
 
  
  function addtocart(productId){
