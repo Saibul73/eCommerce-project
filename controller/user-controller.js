@@ -129,15 +129,18 @@ if(user.otpVerified==false)return res.render('user/user-login',{msg:'otp not ver
     },
     viewProduct: async (req,res,next)=>{
         try {
+            
             let user = req.session.user
-        let product = await productModel.findOne({_id: req.params.id}).lean()
-        console.log(product);
-        let cartCount = await getcartcount(req,res)
-        let wishCount = await getwishcount(req,res)
-        res.render('user/product_detail',{product,user,cartCount,wishCount})
+            console.log(req.params.id)
+            let product = await productModel.findOne({_id:req.params.id}).lean()
+            let cartCount = await getcartcount(req,res)
+            let wishCount = await getwishcount(req,res)
+            res.render('user/product_detail',{product,user,cartCount,wishCount})
         } catch (error) {
+            console.log(error);
             next(error)
         }
+        
         
     },
     logout:(req,res,next)=>{
